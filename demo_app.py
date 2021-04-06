@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 
 with st.echo(code_location='below'):
-    df=pd.read_csv("city_temperature.csv", low_memory=False)
-    st.title("Daily Temperature of Major Cities")
+    df=pd.read_csv("netflix_titles.csv")
+    st.title("Netflix Movies and TV Shows")
     """
     This is a test.
     """
