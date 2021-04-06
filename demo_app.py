@@ -15,4 +15,4 @@ with st.echo(code_location='below'):
     ax.bar(index, values)
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
-    plt.show()
+    st.pyplot(fig)
