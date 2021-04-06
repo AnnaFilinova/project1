@@ -6,8 +6,9 @@ import pandas as pd
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
     st.title("Netflix Movies and TV Shows")
-    date1 = st.slider('The Starting Year of the Interval', min_value=1925, max_value=2021)
-    date2= st.slider('The Ending Year of the Interval', min_value=date1, max_value=2021)
+    st.subheader("Release Dates")
+    date1 = st.slider('Please select the starting year of the interval', min_value=1925, max_value=2021)
+    date2= st.slider('Please select the ending year of the interval', min_value=date1, max_value=2021)
     index=[i for i in range (date1, date2+1)]
     values=[ sum(df['release_year']==i) for i in range (date1, date2+1)]
     fig, ax = plt.subplots()
