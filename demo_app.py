@@ -26,7 +26,7 @@ with st.echo(code_location='below'):
     country='United States'
     df1=df[df['country']==country]
     df1=df1[['release_year', 'type']]
-    df1=df1[df1['release_year']]>=1980
+    df1=df1[df1['release_year']>=1980]
     df1['values']=1
     c=alt.Chart(df1).mark_area().encode(
         x='release_year:T',
