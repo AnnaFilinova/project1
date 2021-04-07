@@ -30,6 +30,7 @@ with st.echo(code_location='below'):
     c=alt.Chart(df1).transform_window(
         Type='sum(values)',
         groupby=['type'],
+        sort=[{'field': 'release_year'}],
         frame=[None, 0]
     ).mark_area(
     ).encode(
