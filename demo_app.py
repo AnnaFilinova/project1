@@ -25,7 +25,7 @@ with st.echo(code_location='below'):
     #Choose country
     country='United States'
     df['ones']=1
-    alt.Chart(df1).mark_area().encode(
+    alt.Chart(df).mark_area().encode(
         x="Year:release_year",
         y=alt.Y("Movies/TV Shows:ones", stack="normalize"),
         color="Type:type"
