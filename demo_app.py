@@ -29,7 +29,7 @@ with st.echo(code_location='below'):
     df1['values']=1
     c=alt.Chart(df1).mark_area().encode(
         x='release_year:T',
-        y=alt.Y('Type:Q'),
+        y=alt.Y('values:Q'),
         color='type'
     )
     st.write(c)
