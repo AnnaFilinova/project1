@@ -27,13 +27,7 @@ with st.echo(code_location='below'):
     df1=df[df['country']==country]
     df1=df1[['release_year', 'type']]
     df1['values']=1
-    c=alt.Chart(df1).transform_window(
-        Type='sum(values)',
-        groupby=['type'],
-        sort=[{'field': 'release_year'}],
-        frame=[None, 0]
-    ).mark_area(
-    ).encode(
+    c=alt.Chart(df1).mark_area().encode(
         x='release_year:T',
         y=alt.Y('Type:Q'),
         color='type'
