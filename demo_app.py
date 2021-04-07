@@ -22,7 +22,7 @@ with st.echo(code_location='below'):
     st.pyplot(fig)
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
-    sb = st.selectbox('Please select a country', ('United states', 'India', 'United Kingdom', 'Japan', 'South Korea'))
+    sb = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
     country=sb
     df1=df[df['country']==country]
     df1=df1[['release_year', 'type']]
@@ -30,7 +30,7 @@ with st.echo(code_location='below'):
     df1['proportion']=1
     st.write(f'Movies/TV Shows proportion in {sb} in 1980-2021')
     c=alt.Chart(df1).mark_area().encode(
-        x='release_year:T',
+        x='release_year:Q',
         y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
     )
