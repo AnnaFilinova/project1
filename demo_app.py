@@ -21,16 +21,17 @@ with st.echo(code_location='below'):
     ax.set_ylabel("Number of Movies and TV Shows Released")
     st.pyplot(fig)
 
-    st.subheader("Proportion of Movies and TV Shows")
-    #Choose country
-    country='United States'
+    st.subheader("Proportion of Movies and TV Shows 1980-2021")
+    chb = st.checkbox('Please select a country', ('United states', 'India', 'United Kingdom', 'Japan', 'South Korea'))
+    country=chb
     df1=df[df['country']==country]
     df1=df1[['release_year', 'type']]
     df1=df1[df1['release_year']>=1980]
-    df1['values']=1
+    df1['proportion']=1
+    st.write(f'Movies/TV Shows proportion in {chb} in 1980-2021')
     c=alt.Chart(df1).mark_area().encode(
         x='release_year:T',
-        y=alt.Y('values:Q', stack="normalize"),
+        y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
     )
     st.write(c)
