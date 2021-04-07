@@ -24,9 +24,17 @@ with st.echo(code_location='below'):
     st.subheader("Proportion of Movies and TV Shows")
     #Choose country
     country='United States'
-    df['ones']=1
-    alt.Chart(df).mark_area().encode(
-        x="Year:release_year",
-        y=alt.Y("Movies/TV Shows:ones", stack="normalize"),
-        color="Type:type"
+    df1=df[df['country']==country]
+    df1=df1[['release_year', 'type']]
+    df1['values']=1
+    c=alt.Chart(df1).transform_window(
+        Type='sum(values)',
+        groupby=['type'],
+        frame=[None, 0]
+    ).mark_area(
+    ).encode(
+        x='release_year:T',
+        y=alt.Y('Type:Q'),
+        color='type'
     )
+    st.write(c)
