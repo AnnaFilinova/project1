@@ -33,5 +33,8 @@ with st.echo(code_location='below'):
         x='release_year:O',
         y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
+    ).interactive().properties(
+        width=1000,
+        height=500
     )
     st.write(c)
