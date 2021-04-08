@@ -28,7 +28,7 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'type']]
     df1=df1[df1['release_year']>=1980]
     df1['proportion']=1
-    alt.title(f'Movies/TV Shows proportion in {sb} in 1980-2021')
+    st.write(f'Movies/TV Shows proportion in {sb} in 1980-2021')
     c=alt.Chart(df1).mark_area().encode(
         x='release_year:O',
         y=alt.Y('proportion:Q', stack="normalize"),
