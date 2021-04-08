@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import altair as alt
+import seaborn as sns
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -28,7 +29,6 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'type']]
     df1=df1[df1['release_year']>=1980]
     df1['proportion']=1
-    #st.write(f'Movies/TV Shows proportion in {sb} in 1980-2021')
     c=alt.Chart(df1, title=f'Movies/TV Shows proportion in {sb} in 1980-2021').mark_area().encode(
         x='release_year:O',
         y=alt.Y('proportion:Q', stack="normalize"),
@@ -38,3 +38,9 @@ with st.echo(code_location='below'):
         height=500
     )
     st.write(c)
+
+    fl=st.select_slider('Please select the first letter of a movie/TV show',
+                        options=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
+    lst=df['title'].unique()
+    lst=[i for i in lst if i.startswith(fl)]
+    sb=st.selectbox('Please choose which poster you want to look at', lst)
