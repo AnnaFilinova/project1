@@ -31,7 +31,7 @@ with st.echo(code_location='below'):
     st.write(f'Movies/TV Shows proportion in {sb} in 1980-2021')
     c=alt.Chart(df1).mark_area().encode(
         x='release_year:O',
-        y=alt.Y('proportion:Q', stack="normalize"),
+        y=alt.Y('proportion:N', stack="normalize"),
         color='type'
     )
     st.write(c)
