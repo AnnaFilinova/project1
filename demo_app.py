@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import seaborn as sns
+import requests
+from bs4 import BeautifulSoup
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -43,4 +45,15 @@ with st.echo(code_location='below'):
                         options=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
     lst=df['title'].unique()
     lst=[i for i in lst if i.startswith(fl)]
-    sb=st.selectbox('Please choose which poster you want to look at', lst)
+    name=st.selectbox('Please choose which poster you want to look at', lst)
+    Name = ''
+    for i in name.split():
+        Name = Name + '+' + i
+    Name = Name[1:]
+    url = f'https://www.google.com/search?q={Name}+netflix&newwindow=1&safe=active&sxsrf=ALeKk00c55dPIS91D_lKRoWWdgnl_CR3CQ:1618000988414&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjBjKSxg_LvAhVjwIsKHTORBi0Q_AUoAXoECAEQAw&biw=1536&bih=754'
+    r = requests.get(url)
+    s = BeautifulSoup(r.text)
+    pstr = s.find_all('img')[1]['src']
+    st.image(pstr, title=f'Poster for {name}')
+
+
