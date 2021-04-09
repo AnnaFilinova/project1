@@ -36,8 +36,8 @@ with st.echo(code_location='below'):
         y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
     ).properties(
-        width=350,
-        height=250
+        width=700,
+        height=500
     )
     st.write(c)
 
