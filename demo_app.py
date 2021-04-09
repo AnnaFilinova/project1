@@ -41,6 +41,7 @@ with st.echo(code_location='below'):
     )
     st.write(c)
 
+    st.subheader("Would you like some posters?")
     fl=st.select_slider('Please select the first letter of a movie/TV show',
                         options=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'])
     lst=df['title'].unique()
@@ -54,6 +55,7 @@ with st.echo(code_location='below'):
     r = requests.get(url)
     s = BeautifulSoup(r.text)
     pstr = s.find_all('img')[1]['src']
-    st.image(pstr, title=f'Poster for {name}')
+    st.write(f'Poster for {name}')
+    st.image(pstr)
 
 
