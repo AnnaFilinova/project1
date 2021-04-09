@@ -56,7 +56,7 @@ with st.echo(code_location='below'):
     s = BeautifulSoup(r.text)
     pstr = s.find_all('img')[1]['src']
     st.write(f'Poster for {name}')
-    st.image(pstr, use_column_width=True)
+    st.image(pstr, width=500)
     st.balloons()
 
 
