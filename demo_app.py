@@ -74,7 +74,7 @@ with st.echo(code_location='below'):
         unsafe_allow_html=True
     )
 
-    st.subheader("Release Date/The Date it Was Added to Netflix")
+    st.subheader("Release Date/The Date a Movie Was Added to Netflix")
     df2=df[df['type']=='Movie']
     lst=[]
     for i in df2['date_added'].to_list():
@@ -84,18 +84,17 @@ with st.echo(code_location='below'):
         except:
             lst.append(int(i))
     df2['year_added']=np.array(lst)
-    lst1=[int(i.split()[0]) for i in df2['duration']]
-    df2['dur']=np.array(lst1)
     fig = plt.figure()
-    sns.set(style="darkgrid")
-    ax = fig.add_subplot(111, projection='3d')
-    x = df2['release_year']
-    y = df2['year_added']
-    z = df2['dur']
-    ax.set_xlabel("Release Year")
-    ax.set_ylabel("The Year the Movie Was Added to Netflix")
-    ax.set_zlabel("Duration, minutes")
-    ax=sns.scatterplot(x, y, z, hue='rating', palette='deep')
+    ax = sns.scatterplot(
+        data=df2,
+        x='release_year',
+        y='year_added',
+        hue='type',
+        palette='deep',
+        picker=True
+    )
+    plt.xlabel("Release Year")
+    plt.ylabel("The Year the Movie Was Added to Netflix")
     st.pyplot(fig)
 
 
