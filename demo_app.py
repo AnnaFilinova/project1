@@ -31,8 +31,9 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'type']]
     df1=df1[df1['release_year']>=1980]
     df1['proportion']=1
+    df['release_year'] = pd.to_datetime(df['release_year'], format="%Y")
     c=alt.Chart(df1, title=f'Movies/TV Shows proportion in {sb} in 1980-2021').mark_area().encode(
-        x='release_year:O',
+        x='release_year:T',
         y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
     ).properties(
