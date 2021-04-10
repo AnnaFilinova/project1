@@ -26,8 +26,7 @@ with st.echo(code_location='below'):
     ax.bar(index, values)
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
-    color= 'magenta'
-    st.pyplot(fig)
+    st.pyplot(fig, color= 'magenta')
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
     country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
@@ -86,7 +85,7 @@ with st.echo(code_location='below'):
     sea = sns.scatterplot(
         data=df,
         x='date_released',
-        y='date_added',
+        y='year_added',
         hue='type',
         palette='deep'
     )
