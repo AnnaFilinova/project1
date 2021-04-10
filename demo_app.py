@@ -35,15 +35,15 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'proportion','type' ]]
     df1=df1[df1['release_year']>=1980]
 
-    c=alt.Chart(df1, title=f'Movies/TV Shows proportion in {sb} in 1980-2021').mark_area().encode(
-        x='Year:O',
-        y=alt.Y('Proportion:Q', stack="normalize"),
-        color='Type'
+    st.write(alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_area().encode(
+        x='release_year:O',
+        y=alt.Y('proportion:Q', stack="normalize"),
+        color='type'
     ).properties(
         width=700,
         height=500
-    )
-    st.write(c)
+    ))
+    #st.write(c)
 
     st.subheader("Would you like some posters?")
     fl=st.select_slider('Please select the first letter of a movie/TV show',
