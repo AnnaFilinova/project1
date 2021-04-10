@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import imageio as io
 import os
 import base64
+from mpl_toolkits.mplot3d import Axes3D
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -74,24 +75,26 @@ with st.echo(code_location='below'):
     )
 
     st.subheader("Release Date/The Date it Was Added to Netflix")
+    df2=df[df['type']=='Movie']
     lst=[]
-    for i in df['date_added'].to_list():
+    for i in df2['date_added'].to_list():
         try:
             splt=i.split()
             lst.append(int(splt[-1]))
         except:
             lst.append(int(i))
-    df['year_added']=np.array(lst)
+    df2['year_added']=np.array(lst)
+    lst1=[int(i.split()[0]) for i in df2['duration']]
+    df2['dur']=np.array(lst1)
     fig = plt.figure()
-    ax=sns.scatterplot(
-        data=df,
-        x='release_year',
-        y='year_added',
-        hue='type',
-        palette='deep'
-    )
-    plt.xlabel("Release Year")
-    plt.ylabel("The Year it Was Added to Netflix")
+    ax = fig.add_subplot(111, projection='3d')
+    x = df2['release_year']
+    y = df2['year_added']
+    z = df2['dur']
+    ax.set_xlabel("Release Year")
+    ax.set_ylabel("The Year the Movie Was Added to Netflix")
+    ax.set_zlabel("Duration, minutes")
+    ax=sns.scatterplot(x, y, z, hue='rating', palette='deep')
     st.pyplot(fig)
 
 
