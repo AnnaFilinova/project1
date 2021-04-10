@@ -26,7 +26,7 @@ with st.echo(code_location='below'):
     ax.bar(index, values)
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
-    st.pyplot(fig, color= 'green')
+    st.pyplot(fig, col= 'green')
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
     country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
@@ -82,7 +82,7 @@ with st.echo(code_location='below'):
         except:
             lst.append(i)
     df['year_added']=np.array(lst)
-    sea = sns.scatterplot(
+    sns.scatterplot(
         data=df,
         x='release_year',
         y='year_added',
@@ -91,6 +91,6 @@ with st.echo(code_location='below'):
     )
     plt.xlabel("Release Year")
     plt.ylabel("The Year it Was Added to Netflix")
-    st.pyplot(sea)
+    st.pyplot()
 
 
