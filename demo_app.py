@@ -9,7 +9,9 @@ from bs4 import BeautifulSoup
 import imageio as io
 import os
 import base64
-from mpl_toolkits.mplot3d import Axes3D
+from bokeh.models import Div, RangeSlider, Spinner
+from bokeh.layouts import layout
+from bokeh.plotting import figure, show
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -89,12 +91,51 @@ with st.echo(code_location='below'):
         data=df2,
         x='release_year',
         y='year_added',
-        hue='type',
+        hue='rating',
         palette='deep',
         picker=True
     )
     plt.xlabel("Release Year")
     plt.ylabel("The Year the Movie Was Added to Netflix")
     st.pyplot(fig)
+
+    st.subheader('TV Shows releases')
+    df2 = df[df['type'] == 'TV Show']
+    x = [i for i in range(1967, 2022)]
+    y = [sum(df['release_year'] == i) for i in range(1967, 2022)]
+    p = figure(plot_width=700, plot_height=500)
+    points = p.circle(x=x, y=y, size=30, fill_color="#21a7df")
+    div = Div(
+        text="""
+            <p>Select the circle's size using this control element:</p>
+            """,
+        width=200,
+        height=30,
+    )
+    spinner = Spinner(
+        title="Circle size",
+        low=0,
+        high=60,
+        step=5,
+        value=points.glyph.size,
+        width=200,
+    )
+    spinner.js_link("value", points.glyph, "size")
+    range_slider = RangeSlider(
+        title="Adjust x-axis range",
+        start=1967,
+        end=2021,
+        step=1,
+        value=(p.x_range.start, p.x_range.end),
+    )
+    range_slider.js_link("value", p.x_range, "end", attr_selector=1)
+    layout = layout([
+        [div, spinner],
+        [range_slider],
+        [p],
+    ])
+
+    show(layout)
+
 
 
