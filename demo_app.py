@@ -31,13 +31,14 @@ with st.echo(code_location='below'):
     sb = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
     country=sb
     df1=df[df['country']==country]
-    df1=df1[['release_year', 'type']]
-    df1=df1[df1['release_year']>=1980]
     df1['proportion']=1
+    df1=df1[['release_year', 'proportion','type' ]]
+    df1=df1[df1['release_year']>=1980]
+
     c=alt.Chart(df1, title=f'Movies/TV Shows proportion in {sb} in 1980-2021').mark_area().encode(
-        x='release_year:О',
-        y=alt.Y('proportion:Q', stack="normalize"),
-        color='type'
+        x='Year:O',
+        y=alt.Y('Proportion:Q', stack="normalize"),
+        color='Type'
     ).properties(
         width=700,
         height=500
