@@ -12,6 +12,7 @@ import base64
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
+    df.dropna()
 
     st.title("Netflix Movies and TV Shows")
 
@@ -25,16 +26,15 @@ with st.echo(code_location='below'):
     ax.bar(index, values)
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
+    color= 'magenta'
     st.pyplot(fig)
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
-    sb = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
-    country=sb
+    country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
     df1=df[df['country']==country]
     df1['proportion']=1
     df1=df1[['release_year', 'proportion','type' ]]
     df1=df1[df1['release_year']>=1980]
-
     prop=alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_area().encode(
         x='release_year',
         y=alt.Y('proportion', stack="normalize"),
@@ -73,5 +73,25 @@ with st.echo(code_location='below'):
         f'<img src="data:image/gif;base64,{url}" alt="cat gif">',
         unsafe_allow_html=True
     )
+
+    st.subheader("Release Date/The Date it Was Added to Netflix")
+    lst=[]
+    for i in df['date_added'].to_list():
+        try:
+            splt=i.split()
+            lst.append(splt[-1])
+        except:
+            lst.append(i)
+    df['year_added']=np.array(lst)
+    sea = sns.scatterplot(
+        data=df,
+        x='date_released',
+        y='date_added',
+        hue='type',
+        palette='deep'
+    )
+    plt.xlabel("Release Year")
+    plt.ylabel("The Year it Was Added to Netflix")
+    st.pyplot(sea)
 
 
