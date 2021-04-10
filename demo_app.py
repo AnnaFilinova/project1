@@ -6,6 +6,9 @@ import altair as alt
 import seaborn as sns
 import requests
 from bs4 import BeautifulSoup
+import imageio as io
+import os
+import base64
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -31,9 +34,8 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'type']]
     df1=df1[df1['release_year']>=1980]
     df1['proportion']=1
-    df['release_year'] = pd.to_datetime(df['release_year'], format="%Y")
     c=alt.Chart(df1, title=f'Movies/TV Shows proportion in {sb} in 1980-2021').mark_area().encode(
-        x='release_year:T',
+        x='release_year:О',
         y=alt.Y('proportion:Q', stack="normalize"),
         color='type'
     ).properties(
@@ -55,9 +57,19 @@ with st.echo(code_location='below'):
     url = f'https://www.google.com/search?q={Name}+netflix&newwindow=1&safe=active&sxsrf=ALeKk00c55dPIS91D_lKRoWWdgnl_CR3CQ:1618000988414&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjBjKSxg_LvAhVjwIsKHTORBi0Q_AUoAXoECAEQAw&biw=1536&bih=754'
     r = requests.get(url)
     s = BeautifulSoup(r.text)
-    pstr = s.find_all('img')[1]['src']
-    st.write(f'Poster for {name}')
-    st.image(pstr, width=250)
-    st.balloons()
+    allpstr = s.find_all('img')
+    with io.get_writer('posters.gif', mode='I', duration=0.5) as writer:
+        for i in range (10):
+            image = io.imread(allpstr[i+1]['src'])
+            writer.append_data(image)
+    writer.close()
+    file_ = open("posters.gif", "rb")
+    contents = file_.read()
+    data_url = base64.b64encode(contents).decode("utf-8")
+    file_.close()
+
+    #st.write(f'Poster for {name}')
+    #st.image(pstr, width=250)
+    #st.balloons()
 
 

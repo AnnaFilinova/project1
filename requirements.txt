@@ -6,3 +6,4 @@ altair
 seaborn
 requests
 bs4
+imageio
