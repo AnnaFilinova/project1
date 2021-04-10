@@ -12,7 +12,7 @@ import base64
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
-    df.dropna()
+    df.dropna(inplace=True)
 
     st.title("Netflix Movies and TV Shows")
 
@@ -78,11 +78,11 @@ with st.echo(code_location='below'):
     for i in df['date_added'].to_list():
         try:
             splt=i.split()
-            lst.append(splt[-1])
+            lst.append(int(splt[-1]))
         except:
-            lst.append(i)
+            lst.append(int(i))
     df['year_added']=np.array(lst)
-    sns.scatterplot(
+    fig=sns.scatterplot(
         data=df,
         x='release_year',
         y='year_added',
@@ -91,6 +91,6 @@ with st.echo(code_location='below'):
     )
     plt.xlabel("Release Year")
     plt.ylabel("The Year it Was Added to Netflix")
-    st.pyplot()
+    st.pyplot(fig)
 
 
