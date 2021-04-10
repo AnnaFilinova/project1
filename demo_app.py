@@ -68,10 +68,7 @@ with st.echo(code_location='below'):
     contents = file_.read()
     data_url = base64.b64encode(contents).decode("utf-8")
     file_.close()
-    st.markdown(
-        f'<img src="data:image/gif;base64,{data_url}" alt=f"Poster for {name}"">',
-        unsafe_allow_html=True,
-    )
+    st.image(url, width=300)
     #st.write(f'Poster for {name}')
     #st.image(pstr, width=250)
 
