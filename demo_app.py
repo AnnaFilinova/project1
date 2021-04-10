@@ -82,7 +82,8 @@ with st.echo(code_location='below'):
         except:
             lst.append(int(i))
     df['year_added']=np.array(lst)
-    fig=sns.scatterplot(
+    fig = plt.figure()
+    ax=sns.scatterplot(
         data=df,
         x='release_year',
         y='year_added',
