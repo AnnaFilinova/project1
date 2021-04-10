@@ -87,6 +87,7 @@ with st.echo(code_location='below'):
     lst1=[int(i.split()[0]) for i in df2['duration']]
     df2['dur']=np.array(lst1)
     fig = plt.figure()
+    sns.set(style="darkgrid")
     ax = fig.add_subplot(111, projection='3d')
     x = df2['release_year']
     y = df2['year_added']
