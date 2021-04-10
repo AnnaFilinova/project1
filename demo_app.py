@@ -100,14 +100,14 @@ with st.echo(code_location='below'):
     st.pyplot(fig)
 
     st.subheader('TV Shows releases')
-    df2 = df[df['type'] == 'TV Show']
+    df3 = df[df['type'] == 'TV Show']
     x = [i for i in range(1967, 2022)]
-    y = [sum(df['release_year'] == i) for i in range(1967, 2022)]
-    p = figure(plot_width=700, plot_height=500)
-    points = p.circle(x=x, y=y, size=30, fill_color="#21a7df")
+    y = [sum(df3['release_year'] == i) for i in range(1967, 2022)]
+    p = figure(x_range=(1990, 2020), plot_width=700, plot_height=500)
+    points = p.circle(x=x, y=y, size=20, fill_color="#21a7df")
     div = Div(
         text="""
-            <p>Select the circle's size using this control element:</p>
+            <p>Please select the circle's size:</p>
             """,
         width=200,
         height=30,
@@ -115,7 +115,7 @@ with st.echo(code_location='below'):
     spinner = Spinner(
         title="Circle size",
         low=0,
-        high=60,
+        high=40,
         step=5,
         value=points.glyph.size,
         width=200,
@@ -123,10 +123,11 @@ with st.echo(code_location='below'):
     spinner.js_link("value", points.glyph, "size")
     range_slider = RangeSlider(
         title="Adjust x-axis range",
-        start=1967,
-        end=2021,
+        #start=1967,
+        #end=2021,
         step=1,
-        value=(p.x_range.start, p.x_range.end),
+        #value=(p.x_range.start, p.x_range.end),
+        value=(1967, 2021),
     )
     range_slider.js_link("value", p.x_range, "end", attr_selector=1)
     layout = layout([
