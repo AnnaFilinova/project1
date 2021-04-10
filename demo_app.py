@@ -66,7 +66,7 @@ with st.echo(code_location='below'):
     writer.close()
     file_ = open("posters.gif", "rb")
     contents = file_.read()
-    data_url = base64.b64encode(contents).decode("utf-8")
+    url = base64.b64encode(contents).decode("utf-8")
     file_.close()
     st.image(url, width=300)
     #st.write(f'Poster for {name}')
