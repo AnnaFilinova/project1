@@ -71,8 +71,7 @@ with st.echo(code_location='below'):
     st.write(f'Posters for {name}')
     st.markdown(
         f'<img src="data:image/gif;base64,{url}" alt="cat gif">',
-        unsafe_allow_html=True,
-        width=300
+        unsafe_allow_html=True
     )
 
 
