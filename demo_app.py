@@ -36,8 +36,8 @@ with st.echo(code_location='below'):
     df1=df1[df1['release_year']>=1980]
 
     prop=alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_area().encode(
-        x='release_year:O',
-        y=alt.Y('proportion:Q', stack="normalize"),
+        x='release_year',
+        y=alt.Y('proportion', stack="normalize"),
         color='type'
     ).properties(
         width=700,
