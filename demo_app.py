@@ -5,6 +5,7 @@ import pandas as pd
 import altair as alt
 import seaborn as sns
 import requests
+from bokeh.io import output_file
 from bs4 import BeautifulSoup
 import imageio as io
 import os
@@ -72,7 +73,7 @@ with st.echo(code_location='below'):
     file_.close()
     st.write(f'Posters for {name}')
     st.markdown(
-        f'<img src="data:image/gif;base64,{url}" alt="cat gif">',
+        f'<img src="data:image/gif;base64,{url}" alt="gif">',
         unsafe_allow_html=True
     )
 
@@ -103,6 +104,7 @@ with st.echo(code_location='below'):
     df3 = df[df['type'] == 'TV Show']
     x = [i for i in range(1967, 2022)]
     y = [sum(df3['release_year'] == i) for i in range(1967, 2022)]
+    output_file("first_steps.html")
     p = figure(x_range=(1990, 2020), plot_width=700, plot_height=500)
     points = p.circle(x=x, y=y, size=20, fill_color="#21a7df")
     div = Div(
@@ -123,11 +125,10 @@ with st.echo(code_location='below'):
     spinner.js_link("value", points.glyph, "size")
     range_slider = RangeSlider(
         title="Adjust x-axis range",
-        #start=1967,
-        #end=2021,
+        start=1967,
+        end=2021,
         step=1,
-        #value=(p.x_range.start, p.x_range.end),
-        value=(1967, 2021),
+        value=(p.x_range.start, p.x_range.end),
     )
     range_slider.js_link("value", p.x_range, "end", attr_selector=1)
     layout = layout([
