@@ -74,6 +74,5 @@ with st.echo(code_location='below'):
     )
     #st.write(f'Poster for {name}')
     #st.image(pstr, width=250)
-    #st.balloons()
 
 
