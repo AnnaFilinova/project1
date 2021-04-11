@@ -31,7 +31,7 @@ with st.echo(code_location='below'):
     ax.bar(index, values)
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
-    st.pyplot(fig, col= 'green')
+    st.pyplot(fig, color= 'navy')
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
     country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
@@ -105,11 +105,11 @@ with st.echo(code_location='below'):
 
     st.subheader("TV Shows' Releases")
     df3 = df[df['type'] == 'TV Show']
-    x = [i for i in range(1967, 2022)]
-    y = [sum(df3['release_year'] == i) for i in range(1967, 2022)]
+    x = [i for i in range(1985, 2022)]
+    y = [sum(df3['release_year'] == i) for i in range(1985, 2022)]
     output_file("output.html")
-    p = figure(x_range=(1967, 2020), plot_width=700, plot_height=500)
-    points = p.circle(x=x, y=y, size=15, fill_color="#21a7df")
+    p = figure(x_range=(1985, 2020), plot_width=700, plot_height=500)
+    points = p.circle(x=x, y=y, size=15, fill_color="#green")
     div = Div(
         text="""
             <p>Please select the circle's size:</p>
@@ -128,7 +128,7 @@ with st.echo(code_location='below'):
     spinner.js_link("value", points.glyph, "size")
     range_slider = RangeSlider(
         title="Adjust x-axis range",
-        start=1967,
+        start=1985,
         end=2021,
         step=1,
         value=(p.x_range.start, p.x_range.end),
@@ -139,9 +139,7 @@ with st.echo(code_location='below'):
         [range_slider],
         [p],
     ])
-
     show(layout)
-
     htmlf = open("output.html", 'r', encoding='utf-8')
     source_code = htmlf.read()
     print(source_code)
