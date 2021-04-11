@@ -28,10 +28,10 @@ with st.echo(code_location='below'):
     values=[ sum(df['release_year']==i) for i in range (date1, date2+1)]
     fig, ax = plt.subplots()
     plt.title(f"Number of Movies and TV Shows Released Between {date1} and {date2}")
-    ax.bar(index, values)
+    ax.bar(index, values, color= 'navy')
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
-    st.pyplot(fig, color= 'navy')
+    st.pyplot(fig)
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
     country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
@@ -40,7 +40,7 @@ with st.echo(code_location='below'):
     df1=df1[['release_year', 'proportion','type' ]]
     df1=df1[df1['release_year']>=1980]
     prop=alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_area().encode(
-        x='release_year',
+        x=alt.X('release_year'),
         y=alt.Y('proportion', stack="normalize"),
         color='type'
     ).properties(
@@ -109,7 +109,7 @@ with st.echo(code_location='below'):
     y = [sum(df3['release_year'] == i) for i in range(1985, 2022)]
     output_file("output.html")
     p = figure(x_range=(1985, 2020), plot_width=700, plot_height=500)
-    points = p.circle(x=x, y=y, size=15, fill_color="#green")
+    points = p.circle(x=x, y=y, size=15, fill_color="green")
     div = Div(
         text="""
             <p>Please select the circle's size:</p>
@@ -133,6 +133,7 @@ with st.echo(code_location='below'):
         step=1,
         value=(p.x_range.start, p.x_range.end),
     )
+    range_slider.js_link("value", p.x_range, "start", attr_selector=0)
     range_slider.js_link("value", p.x_range, "end", attr_selector=1)
     layout = layout([
         [div, spinner],
