@@ -95,8 +95,7 @@ with st.echo(code_location='below'):
         x='release_year',
         y='year_added',
         hue='rating',
-        palette='deep',
-        picker=True
+        palette='deep'
     )
     plt.xlabel("Release Year")
     plt.ylabel("The Year the Movie Was Added to Netflix")
