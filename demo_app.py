@@ -94,7 +94,7 @@ with st.echo(code_location='below'):
         data=df2,
         x='release_year',
         y='year_added',
-        hue='rating',
+        #hue='rating',
         palette='deep'
     )
     plt.xlabel("Release Year")
