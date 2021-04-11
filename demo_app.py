@@ -42,11 +42,12 @@ with st.echo(code_location='below'):
     prop=alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_bar().encode(
         x=alt.X('release_year'),
         y=alt.Y("count(proportion)", stack="normalize"),
-        color='type'
+        color='type',
+        tooltip = [alt.Tooltip('count(proportion)', title="Total Students")]
     ).properties(
         width=700,
         height=500
-    ).tooltip=[alt.Tooltip('count(proportion)', title="Total Students")]
+    )
     st.altair_chart(prop)
 
     st.subheader("Would you like some posters?")
