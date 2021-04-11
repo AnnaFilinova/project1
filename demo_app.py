@@ -22,7 +22,7 @@ with st.echo(code_location='below'):
     st.title("Netflix Movies and TV Shows")
 
     st.subheader("Release Dates")
-    date1 = st.slider('Please select the starting year of the interval', min_value=1925, max_value=2021)
+    date1 = st.slider('Please select the starting year of the interval', min_value=1940, max_value=2021)
     date2= st.slider('Please select the ending year of the interval', min_value=date1, max_value=2021)
     index=[i for i in range (date1, date2+1)]
     values=[ sum(df['release_year']==i) for i in range (date1, date2+1)]
@@ -119,7 +119,7 @@ with st.echo(code_location='below'):
     )
     spinner = Spinner(
         title="Circle size",
-        low=0,
+        low=3,
         high=30,
         step=3,
         value=points.glyph.size,
