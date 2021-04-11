@@ -17,7 +17,7 @@ import streamlit.components.v1 as components
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
-    df.dropna(inplace=True)
+
 
     st.title("Netflix Movies and TV Shows")
 
@@ -78,6 +78,8 @@ with st.echo(code_location='below'):
         f'<img src="data:image/gif;base64,{url}" alt="gif">',
         unsafe_allow_html=True
     )
+
+    df.dropna(inplace=True)
 
     st.subheader("Release Date/The Date a Movie Was Added to Netflix")
     df2=df[df['type']=='Movie']
