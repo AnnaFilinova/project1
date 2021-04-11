@@ -111,7 +111,7 @@ with st.echo(code_location='below'):
     x = [i for i in range(1985, 2022)]
     y = [sum(df3['release_year'] == i) for i in range(1985, 2022)]
     output_file("output.html")
-    p = figure(x_range=(1985, 2020), plot_width=700, plot_height=500)
+    p = figure(title="Number of TV Released in the Period",x_range=(1985, 2020), plot_width=700, plot_height=500)
     points = p.circle(x=x, y=y, size=15, fill_color="green")
     div = Div(
         text="""
