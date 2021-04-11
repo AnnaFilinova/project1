@@ -90,7 +90,7 @@ with st.echo(code_location='below'):
             lst.append(int(i))
     df2['year_added']=np.array(lst)
     fig = plt.figure()
-    ax = sns.lmplot(
+    ax = sns.regplot(
         data=df2,
         x='release_year',
         y='year_added',
@@ -138,8 +138,8 @@ with st.echo(code_location='below'):
         [p],
     ])
 
-    #show(layout)
-    st.write(layout)
+    show(layout)
+    st.write("output.html")
 
 
 
