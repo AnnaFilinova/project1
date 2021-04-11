@@ -21,12 +21,11 @@ with st.echo(code_location='below'):
     st.title("Netflix Movies and TV Shows")
 
     st.subheader("Release Dates")
-    date1 = st.slider('Please select the starting year of the interval', min_value=1940, max_value=2021)
-    date2= st.slider('Please select the ending year of the interval', min_value=date1, max_value=2021)
-    index=[i for i in range (date1, date2+1)]
-    values=[ sum(df['release_year']==i) for i in range (date1, date2+1)]
+    year = st.slider("Select Year Range:", 1925, 2021, (1970, 2020))
+    index=[i for i in range (year[0], year[1]+1)]
+    values=[ sum(df['release_year']==i) for i in range (year[0], year[1]+1)]
     fig, ax = plt.subplots()
-    plt.title(f"Number of Movies and TV Shows Released Between {date1} and {date2}")
+    plt.title(f"Number of Movies and TV Shows Released Between {year[0]} and {year[1]}")
     ax.bar(index, values, color= 'navy')
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Movies and TV Shows Released")
