@@ -13,6 +13,7 @@ import base64
 from bokeh.models import Div, RangeSlider, Spinner
 from bokeh.layouts import layout
 from bokeh.plotting import figure, show
+import streamlit.components.v1 as components
 
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
@@ -90,12 +91,13 @@ with st.echo(code_location='below'):
             lst.append(int(i))
     df2['year_added']=np.array(lst)
     fig = plt.figure()
-    ax = sns.regplot(
+    ax = sns.scatterplot(
         data=df2,
         x='release_year',
         y='year_added',
-        #hue='rating',
-        #palette='deep'
+        hue='rating',
+        palette='deep',
+        picker=True
     )
     plt.xlabel("Release Year")
     plt.ylabel("The Year the Movie Was Added to Netflix")
@@ -139,7 +141,11 @@ with st.echo(code_location='below'):
     ])
 
     show(layout)
-    st.write("output.html")
+
+    htmlf = open("output.html", 'r', encoding='utf-8')
+    source_code = htmlf.read()
+    print(source_code)
+    components.html(source_code)
 
 
 
