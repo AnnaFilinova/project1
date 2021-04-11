@@ -108,8 +108,8 @@ with st.echo(code_location='below'):
     x = [i for i in range(1967, 2022)]
     y = [sum(df3['release_year'] == i) for i in range(1967, 2022)]
     output_file("output.html")
-    p = figure(x_range=(1990, 2020), plot_width=700, plot_height=500)
-    points = p.circle(x=x, y=y, size=20, fill_color="#21a7df")
+    p = figure(x_range=(1967, 2020), plot_width=700, plot_height=500)
+    points = p.circle(x=x, y=y, size=15, fill_color="#21a7df")
     div = Div(
         text="""
             <p>Please select the circle's size:</p>
@@ -120,8 +120,8 @@ with st.echo(code_location='below'):
     spinner = Spinner(
         title="Circle size",
         low=0,
-        high=40,
-        step=5,
+        high=30,
+        step=3,
         value=points.glyph.size,
         width=200,
     )
