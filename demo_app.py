@@ -41,8 +41,11 @@ with st.echo(code_location='below'):
     prop=alt.Chart(df1, title=f'Movies/TV Shows proportion in {country} in 1980-2021').mark_bar().encode(
         x=alt.X('release_year:O', title='Release Year'),
         y=alt.Y("count(proportion):Q", stack="normalize", title='Proportion of Movies/TV Shows'),
-        color='type:N',
-        tooltip = [alt.Tooltip('count(proportion)', title="Total Number")]
+        tooltip = [alt.Tooltip('count(proportion)', title="Total Number")],
+        color=alt.Color('type',
+                        scale=alt.Scale(
+                            domain=['Movie', 'TV Show'],
+                            range=['red', 'green']))
     ).properties(
         width=700,
         height=500
@@ -98,7 +101,7 @@ with st.echo(code_location='below'):
         x='release_year',
         y='year_added',
         hue='rating',
-        palette='deep',
+        palette='pastel',
         picker=True
     )
     plt.xlabel("Release Year")
