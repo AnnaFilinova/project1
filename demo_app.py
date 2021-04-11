@@ -18,7 +18,6 @@ import streamlit.components.v1 as components
 with st.echo(code_location='below'):
     df=pd.read_csv("netflix_titles.csv")
 
-
     st.title("Netflix Movies and TV Shows")
 
     st.subheader("Release Dates")
@@ -34,7 +33,8 @@ with st.echo(code_location='below'):
     st.pyplot(fig)
 
     st.subheader("Proportion of Movies and TV Shows 1980-2021")
-    country = st.selectbox('Please select a country', ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
+    country = st.selectbox('Please select a country',
+                           ('United States', 'India', 'United Kingdom', 'Japan', 'South Korea'))
     df1=df[df['country']==country]
     df1['proportion']=1
     df1=df1[['release_year', 'proportion','type' ]]
@@ -111,7 +111,8 @@ with st.echo(code_location='below'):
     x = [i for i in range(1985, 2022)]
     y = [sum(df3['release_year'] == i) for i in range(1985, 2022)]
     output_file("output.html")
-    p = figure(title="Number of TV Released in the Period",x_range=(1985, 2020), plot_width=700, plot_height=500)
+    p = figure(title="Number of TV Shows Released in the Period",
+               x_range=(1985, 2020), plot_width=700, plot_height=500)
     points = p.circle(x=x, y=y, size=15, fill_color="green")
     div = Div(
         text="""
