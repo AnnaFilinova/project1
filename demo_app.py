@@ -90,7 +90,7 @@ with st.echo(code_location='below'):
             lst.append(int(i))
     df2['year_added']=np.array(lst)
     fig = plt.figure()
-    ax = sns.scatterplot(
+    ax = sns.lmplot(
         data=df2,
         x='release_year',
         y='year_added',
@@ -102,7 +102,7 @@ with st.echo(code_location='below'):
     plt.ylabel("The Year the Movie Was Added to Netflix")
     st.pyplot(fig)
 
-    st.subheader('TV Shows releases')
+    st.subheader("TV Shows' Releases")
     df3 = df[df['type'] == 'TV Show']
     x = [i for i in range(1967, 2022)]
     y = [sum(df3['release_year'] == i) for i in range(1967, 2022)]
@@ -139,7 +139,8 @@ with st.echo(code_location='below'):
         [p],
     ])
 
-    show(layout)
+    #show(layout)
+    st.write(layout)
 
 
 
