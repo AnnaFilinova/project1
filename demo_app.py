@@ -79,6 +79,8 @@ with st.echo(code_location='below'):
 
     st.subheader("Release Date/The Date a Movie Was Added to Netflix")
     df2=df[df['type']=='Movie']
+    rate=st.multiselect('Please select rating of a movie', df2['rating'].unique())
+    df2=df2[df['rating'].isin(rate)]
     lst=[]
     for i in df2['date_added'].to_list():
         try:
